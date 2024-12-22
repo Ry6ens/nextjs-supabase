@@ -122,11 +122,11 @@ export async function oAuthSignIn(provider: Provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${origin}/auth/callback`,
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || origin}/auth/callback`,
     },
   })
 
-  console.log('data', data)
+  console.log(data)
 
   if (error) {
     redirect('/login?message=Could not authenticate user')
