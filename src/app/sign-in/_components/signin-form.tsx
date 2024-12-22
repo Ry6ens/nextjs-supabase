@@ -112,11 +112,14 @@ export function SignInForm() {
           </FormMessage>
         )}
 
-        <Button asChild variant='link'>
-          <Link href='/sign-up' className='!px-0'>
-            Sign Up
-          </Link>
-        </Button>
+        <div className='flex items-center gap-2'>
+          <p className='text-sm'>Don't have account?</p>
+          <Button asChild variant='link'>
+            <Link href='/sign-up' className='!px-0 underline'>
+              Sign Up
+            </Link>
+          </Button>
+        </div>
       </form>
     </Form>
   )

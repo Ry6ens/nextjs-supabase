@@ -1,10 +1,13 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
-import { createClient } from '@/utils/supabase/server'
 import { authFormSchema } from '@/schemas'
+import { createClient } from '@/utils/supabase/server'
+
+import type { Provider } from '@supabase/supabase-js'
 
 import type { z } from 'zod'
 
@@ -107,3 +110,44 @@ export async function SignOut() {
 
   redirect('/signin')
 }
+
+export async function oAuthSignIn(provider: Provider) {
+  if (!provider) {
+    return redirect('/login?message=No provider selected')
+  }
+
+  const supabase = await createClient()
+  const origin = headers().get('origin')
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: `${origin}/auth/callback`,
+    },
+  })
+
+  if (error) {
+    redirect('/login?message=Could not authenticate user')
+  }
+
+  return redirect(data.url)
+}
+
+// export async function SigninWithGithub() {
+//   const supabase = await createClient()
+//   const origin = headers().get('origin')
+
+//   const { error, data } = await supabase.auth.signInWithOAuth({
+//     provider: 'github',
+//     options: {
+//       redirectTo: `${origin}/auth/callback`,
+//     },
+//   })
+
+//   if (error) {
+//     console.error('supabase-error', error)
+//     throw new Error('Failed to sign out')
+//   }
+
+//   return redirect(data.url)
+// }
