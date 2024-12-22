@@ -118,6 +118,7 @@ export async function oAuthSignIn(provider: Provider) {
 
   const supabase = await createClient()
   const origin = headers().get('origin')
+  console.log('origin', origin)
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
