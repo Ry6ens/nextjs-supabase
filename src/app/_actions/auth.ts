@@ -122,11 +122,9 @@ export async function oAuthSignIn(provider: Provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || origin}/auth/callback`,
+      redirectTo: `${origin}/auth/callback`,
     },
   })
-
-  console.log(data)
 
   if (error) {
     redirect('/login?message=Could not authenticate user')
@@ -134,22 +132,3 @@ export async function oAuthSignIn(provider: Provider) {
 
   return redirect(data.url)
 }
-
-// export async function SigninWithGithub() {
-//   const supabase = await createClient()
-//   const origin = headers().get('origin')
-
-//   const { error, data } = await supabase.auth.signInWithOAuth({
-//     provider: 'github',
-//     options: {
-//       redirectTo: `${origin}/auth/callback`,
-//     },
-//   })
-
-//   if (error) {
-//     console.error('supabase-error', error)
-//     throw new Error('Failed to sign out')
-//   }
-
-//   return redirect(data.url)
-// }
