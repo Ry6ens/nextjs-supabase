@@ -1,9 +1,10 @@
 'use server'
 
-import { headers } from 'next/headers'
+// import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
+import { getURL } from '@/utils/helpers'
 import { authFormSchema } from '@/schemas'
 import { createClient } from '@/utils/supabase/server'
 
@@ -117,12 +118,16 @@ export async function oAuthSignIn(provider: Provider) {
   }
 
   const supabase = await createClient()
-  const origin = headers().get('origin')
+  // const origin = headers().get('origin')
+
+  console.log(getURL('/auth/callback'))
+  console.log('provider', provider)
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${origin}/auth/callback`,
+      // redirectTo: `${origin}/auth/callback`,
+      redirectTo: getURL('/auth/callback'),
     },
   })
 

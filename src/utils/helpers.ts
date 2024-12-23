@@ -1,4 +1,4 @@
-export const getURL = (path = '') => {
+export const getURL = (path: string) => {
   // Check if NEXT_PUBLIC_SITE_URL is set and non-empty. Set this to your site URL in production env.
   let url =
     process?.env?.NEXT_PUBLIC_SITE_URL &&
@@ -16,10 +16,8 @@ export const getURL = (path = '') => {
   // Make sure to include `https://` when not localhost.
   url = url.includes('http') ? url : `https://${url}`
   // Ensure path starts without a slash to avoid double slashes in the final URL.
-  //   path = path.replace(/^\/+/, '')
-
-  const sanitizedPath = path.replace(/^\/+/, '')
+  const sanitazePath = path.replace(/^\/+/, '')
 
   // Concatenate the URL and the path.
-  return sanitizedPath ? `${url}/${sanitizedPath}` : url
+  return sanitazePath ? `${url}/${sanitazePath}` : url
 }
