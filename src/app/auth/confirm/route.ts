@@ -1,8 +1,6 @@
-import { redirect } from 'next/navigation'
-
 import { createClient } from '@/utils/supabase/server'
 
-import type { NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import type { EmailOtpType } from '@supabase/supabase-js'
 
 export async function GET(request: NextRequest) {
@@ -10,6 +8,11 @@ export async function GET(request: NextRequest) {
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
   const next = searchParams.get('next') ?? '/'
+
+  const redirectTo = request.nextUrl.clone()
+  redirectTo.pathname = next
+  redirectTo.searchParams.delete('token_hash')
+  redirectTo.searchParams.delete('type')
 
   if (token_hash && type) {
     const supabase = await createClient()
@@ -21,9 +24,11 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       console.error('supabase-error', error)
-      throw new Error('Something went wrong!')
+      redirectTo.pathname = '/sign-in?message=Could not verify OTP'
+      return NextResponse.redirect(redirectTo)
     }
 
-    redirect(next)
+    redirectTo.searchParams.delete('next')
+    return NextResponse.redirect(redirectTo)
   }
 }

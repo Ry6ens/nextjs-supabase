@@ -1,6 +1,5 @@
 'use server'
 
-// import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
@@ -84,7 +83,7 @@ export async function SignUp(formData: FormData) {
     },
   }
 
-  const { error } = await supabase.auth.signUp(signupData)
+  const { data, error } = await supabase.auth.signUp(signupData)
 
   if (error) {
     console.error('supabase-error', error)
@@ -118,15 +117,10 @@ export async function oAuthSignIn(provider: Provider) {
   }
 
   const supabase = await createClient()
-  // const origin = headers().get('origin')
-
-  console.log(getURL('/auth/callback'))
-  console.log('provider', provider)
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      // redirectTo: `${origin}/auth/callback`,
       redirectTo: getURL('/auth/callback'),
     },
   })
