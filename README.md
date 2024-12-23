@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextJS - Supabase
 
-## Getting Started
+## Overview
 
-First, run the development server:
+NextJS - Supabase is a task management application built with Next.js and Supabase. The app allows users to create, update, delete, and manage their tasks efficiently. It is deployed on two platforms: Vercel and AWS Amplify.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live URLs
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Vercel Production**: [https://nextjs-supabase-prod.vercel.app/](https://nextjs-supabase-prod.vercel.app/)
+- **Vercel Preview**: [https://nextjs-supabase-preview.vercel.app/](https://nextjs-supabase-preview.vercel.app/)
+- **AWS Amplify**: [https://main.d1mwjr5r2wkjvm.amplifyapp.com/](https://main.d1mwjr5r2wkjvm.amplifyapp.com/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+1. **Task Management**
+   - Create tasks with fields: title, description, due date, and priority.
+   - View tasks in a list format.
+   - Filter and sort tasks by due date and priority.
+   - Mark tasks as completed.
+   - Filter tasks based on status (completed or not completed).
 
-To learn more about Next.js, take a look at the following resources:
+2. **Next.js App Router**
+   - Server-side rendering (SSR) for fetching data and rendering pages.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **UI/UX with Shadcn/UI**
+   - Interactive and visually appealing user interface.
+   - Integrated Shadcn/UI components for enhanced user experience.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Supabase Integration**
+   - Supabase used for storing and retrieving task data.
+   - Server-side actions for handling task creation, updates, and deletions.
 
-## Deploy on Vercel
+5. **Deployment**
+   - The application is deployed on:
+     - **Vercel Production**: [https://nextjs-supabase-prod.vercel.app/](https://nextjs-supabase-prod.vercel.app/)
+     - **Vercel Preview**: [https://nextjs-supabase-preview.vercel.app/](https://nextjs-supabase-preview.vercel.app/) (Preview URL is configured in the `preview.yaml` GitHub Actions file.)
+     - **AWS Amplify**: [https://main.d1mwjr5r2wkjvm.amplifyapp.com/](https://main.d1mwjr5r2wkjvm.amplifyapp.com/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. **Future Enhancements**
+   - Add user authentication with Supabase.
+   - Implement notifications for task reminders.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Technologies Used
+
+- **Frontend**: Next.js (App Router), React
+- **Backend**: Supabase
+- **UI Components**: Shadcn/UI
+- **Deployment Platforms**: Vercel, AWS Amplify
+
+---
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-repo/nextjs-supabase.git
+   cd nextjs-supabase
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   - Create a `.env.local` file in the project root.
+   - Add the following variables:
+     ```env
+     NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+     ```
+
+4. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+
+---
+
+## Deployment
+
+### Vercel
+
+1. Log in to [Vercel](https://vercel.com/) and create a new project.
+2. Link your GitHub repository and configure environment variables.
+3. GitHub Actions:
+   - The project uses GitHub Actions with `preview.yaml` for preview deployments and `production.yaml` for production.
+   - The preview URL is configured in the `preview.yaml` file.
+   - Preview deployments are triggered for non-main branch pushes, and production deployments are triggered for `main` branch pushes.
+
+### AWS Amplify
+
+1. Log in to [AWS Amplify](https://aws.amazon.com/amplify/) and create a new app.
+2. Link your GitHub repository and configure build settings.
+3. Deploy the application.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+## Acknowledgments
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Supabase Documentation](https://supabase.com/docs)
+- [Shadcn/UI Documentation](https://ui.shadcn.dev/)
