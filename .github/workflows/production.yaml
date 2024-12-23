@@ -8,6 +8,15 @@ on:
     branches:
       - main
 jobs:
+  Block-Main-to-Main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block Pull Requests from Main to Main
+        if: github.base_ref == 'main' && github.head_ref == 'main'
+        run: |
+          echo "Pull requests from main to main are not allowed."
+          exit 1
+          
   Deploy-Production:
     runs-on: ubuntu-latest
     steps:
